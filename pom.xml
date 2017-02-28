@@ -6,14 +6,17 @@
 
     <groupId>me.grossen</groupId>
     <artifactId>Reputation</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
+    <name>Reputation</name>
     <url>https://www.spigotmc.org/resources/reputation.31378/</url>
     <description>Let your players check how trusted a player is based on other players.</description>
 
     <build>
         <directory>C:\Users\isake\Dropbox\Coding\Java\Bukkit\McMyAdmin Server\Minecraft\plugins</directory>
-        <finalName>Reputation</finalName>
+        <outputDirectory>temp/classes</outputDirectory>
+        <finalName>${project.name}</finalName>
+
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -21,6 +24,35 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <outputDirectory>temp/shaded</outputDirectory>
+                    <minimizeJar>true</minimizeJar>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <artifactSet>
+                        <includes>
+                            <include>org.bstats:*</include>
+                        </includes>
+                    </artifactSet>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>me.validatedev</shadedPattern>
+                        </relocation>
+                    </relocations>
                 </configuration>
             </plugin>
         </plugins>
@@ -46,6 +78,10 @@
             <id>placeholderapi</id>
             <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>bstats-repo</id>
+            <url>https://repo.bstats.org/content/groups/public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -60,6 +96,12 @@
             <artifactId>placeholderapi</artifactId>
             <version>2.0.8</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>LATEST</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

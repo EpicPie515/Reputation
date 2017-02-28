@@ -1,6 +1,7 @@
 package me.grossen.reputation;
 
 import me.grossen.reputation.language.Lang;
+import org.bstats.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -42,6 +43,8 @@ public class Reputation extends JavaPlugin {
         dataLoader = YamlConfiguration.loadConfiguration(dataFile);
 
         placeholderAPIInstalled = Bukkit.getPluginManager().getPlugin("PlaceHolderAPI") != null;
+
+        Metrics metrics = new Metrics(this);
     }
 
     public Lang getLang() {
