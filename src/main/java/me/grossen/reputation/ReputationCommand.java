@@ -27,7 +27,7 @@ public class ReputationCommand implements CommandExecutor {
             return true;
         }
 
-        if (args[0].equals("check")) {
+        if (args[0].equalsIgnoreCase("check")) {
             if (!player.hasPermission("reputation.check")) {
                 plugin.getLang().sendLang(LangType.NO_PERMISSION, player, false);
                 return true;
@@ -44,7 +44,7 @@ public class ReputationCommand implements CommandExecutor {
             }
             PlayerData playerData = plugin.getPlayerData(target.getUniqueId());
             plugin.getLang().sendLang(LangType.COMMAND_CHECK_SUCCESS, player, true, "player", target.getName(), "good", String.valueOf(playerData.getGoodReputation()), "bad", String.valueOf(playerData.getBadReputation()));
-        } else if (args[0].equals("set")) {
+        } else if (args[0].equalsIgnoreCase("set")) {
             if (!player.hasPermission("reputation.set")) {
                 plugin.getLang().sendLang(LangType.NO_PERMISSION, player, false);
                 return true;
